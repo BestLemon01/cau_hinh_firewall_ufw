@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Service 1: Chạy trên port 8080 (Đã mở qua firewall UFW -> Truy cập thành công)
+  app-allowed:
+    image: nginx:alpine
+    container_name: test-nginx-8080
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # Service 2: Chạy trên port 8081 (Bị UFW chặn -> Kết nối bị từ chối/Timeout)
+  app-blocked:
+    image: nginx:alpine
+    container_name: test-nginx-8081
+    ports:
+      - "8081:80"
+    restart: unless-stopped
